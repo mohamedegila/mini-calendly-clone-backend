@@ -33,10 +33,7 @@ class AuthController extends Controller
         $input = $request->validated();
         $input['password'] = bcrypt($input['password']);
         $user = $this->userRepository->store($input);
-
-        $success['token'] =  $user->createToken('MyApp')->plainTextToken;
-        $success['username'] =  $user->username;
-
+        $success['email'] =  $user->email;
         return new SuccessResource(Response::HTTP_OK, 'User signin successfully', $success);
     }
 
@@ -57,7 +54,7 @@ class AuthController extends Controller
             return new SuccessResource(Response::HTTP_OK, 'User login successfully', $success);
         }
         else{
-            return new ErrorResource(Response::HTTP_UNAUTHORIZED, 'email or password is not correct', 'Unauthorized');
+            return new ErrorResource(Response::HTTP_UNAUTHORIZED, 'email or password is not correct', 'login');
         }
     }
 
