@@ -46,12 +46,12 @@ class EventAtendeeController extends Controller
                 'password'    => ''
 
             ];
-            // $this->zoomService->configSetter($config);
-            // $res =  $this->zoomService->createZoomMeeting();
+            $this->zoomService->configSetter($config);
+            $res =  $this->zoomService->createZoomMeeting();
 
 
-            // if($res['response']){
-                // $input['link'] =  $res['response']['join_url'];
+            if($res['response']){
+                $input['link'] =  $res['response']['join_url'];
 
                 $eventAtendee = EventAtendee::create($input);
 
@@ -69,13 +69,13 @@ class EventAtendeeController extends Controller
                 $users[] = $eventAtendee['email'];
                 $users[] = $eventAtendee->atendee->manger->email;
 
-                // event(new SendMail( $users, $details ));
+                event(new SendMail( $users, $details ));
 
                 return new SuccessResource(Response::HTTP_OK, 'Event registered successfully');
-            // }else{
-            //     return new ErrorResource(Response::HTTP_NOT_FOUND, 'zoom credentials incorrect', '');
+            }else{
+                return new ErrorResource(Response::HTTP_NOT_FOUND, 'zoom credentials incorrect', '');
 
-            // }
+            }
 
         }else{
             return new ErrorResource(Response::HTTP_NOT_FOUND, 'Event not found', '');
