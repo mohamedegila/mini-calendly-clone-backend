@@ -11,8 +11,7 @@ use App\Helpers\ZoomApiHelper;
 use Illuminate\Http\Request;
 use App\Models\EventAtendee;
 use App\Models\Event;
-
-
+use App\Events\SendMail;
 use App\Http\Resources\ErrorResource;
 
 

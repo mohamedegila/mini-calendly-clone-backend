@@ -25,7 +25,14 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::get('/events/{user}/{event}', [EventController::class, 'userEvent']);
 Route::post('/event/register', [EventAtendeeController::class, 'store']);
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('logout', [AuthController::class, 'logout']);
+    Route::apiResource('event', EventController::class);
 
+});
+
+
+// for-testing
 Route::get('/test-zoom', function(){
     $zoom = new ZoomService();
     dump( $zoom);
@@ -58,12 +65,4 @@ Route::get('/test-mail', function(){
     ], $details ));
 
     dd("Email is Sent.");
-});
-
-
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::get('logout', [AuthController::class, 'logout']);
-    Route::apiResource('event', EventController::class);
-
 });
