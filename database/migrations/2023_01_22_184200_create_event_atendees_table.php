@@ -25,7 +25,9 @@ class CreateEventAtendeesTable extends Migration
             $table->string('email');
             $table->string('name');
             $table->string('link')->nullable();
-            $table->unique(['date','start_time','event_id', 'email']);
+            $table->unique(['event_id','start_time']);
+            $table->unique(['event_id', 'email']);
+
             $table->softDeletes();
             $table->timestamps();
         });

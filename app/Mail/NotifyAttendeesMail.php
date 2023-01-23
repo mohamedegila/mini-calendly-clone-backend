@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterEventMail extends Mailable
+class NotifyAttendeesMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,6 +31,6 @@ class RegisterEventMail extends Mailable
     public function build()
     {
         return $this->subject($this->details['title'])
-                    ->markdown('emails.RegisterEvent');
+                    ->markdown('emails.NotifyAttendess');
     }
 }

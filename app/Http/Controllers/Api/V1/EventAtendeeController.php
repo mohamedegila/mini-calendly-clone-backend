@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\SuccessResource;
 use Symfony\Component\HttpFoundation\Response;
 
+use App\Http\Requests\EventAtendeeRequest;
+
 use App\Helpers\ZoomApiHelper;
 use Illuminate\Http\Request;
 use App\Models\EventAtendee;
@@ -22,7 +24,7 @@ class EventAtendeeController extends Controller
 
     public function __construct(private ZoomService $zoomService){}
 
-    function store(Request $request){
+    function store(EventAtendeeRequest $request){
 
         $input = $request->all();
 
@@ -33,9 +35,6 @@ class EventAtendeeController extends Controller
         if( $eventInfo){
             $input['event_id'] =  $eventInfo->id ;
 
-            $validatedData = $request->validate([
-                'email' => 'unique:event_atendees,email,event_id'. $input['event_id'],
-            ]);
 
             $config = [
                 'topic'       => $eventInfo->name,

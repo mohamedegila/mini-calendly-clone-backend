@@ -1,12 +1,9 @@
 @component('mail::message')
 # {{ $details['title'] }}
 
-{{$details['body']}}
+Meeting is about to start
+see link below
 
-Date: {{ $details['date'] }}
-From: {{ $details['start_time'] }}
-To:   {{ $details['end_time'] }}
-Duration(mins): {{ $details['duration'] }}
 
 @component('mail::button', ['url' => $details['link']])
 Zoom link
