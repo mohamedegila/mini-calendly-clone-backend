@@ -31,7 +31,7 @@ class EventAtendeeRequest extends FormRequest
 
     }
 
-    public function message(){
+    public function messages(){
         return [
             'email.unique'   => "You have registered before",
             'start_time.unique' => "This time is reserved",
