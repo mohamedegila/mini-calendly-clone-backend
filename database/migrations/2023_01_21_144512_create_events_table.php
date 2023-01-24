@@ -24,7 +24,7 @@ class CreateEventsTable extends Migration
             $table->time('end_time');
             $table->integer('duration');
             $table->string('location');
-            $table->string('link');
+            $table->string('link')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unique(['name','user_id']);
