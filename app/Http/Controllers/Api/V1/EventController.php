@@ -52,7 +52,6 @@ class EventController extends Controller
         $input = $request->all();
         $input['user_id'] =  auth()->user()->id;
         $event = $this->eventRepository->store($input);
-        // $event['timeSteps'] = $this->timeSteps($event['duration'], $event['start_time'], $event['end_time']);
         return EventResource::make($event);
     }
 
@@ -65,7 +64,7 @@ class EventController extends Controller
     public function show(Event $event)
     {
         if($event['user_id'] === auth()->user()->id){
-            $event['timeSteps'] = $this->timeSteps($event['duration'], $event['start_time'], $event['end_time']);
+            $event['timeSteps'] = $this->timeSteps( $event['start_date'], $event['end_date'], $event['start_time'], $event['end_time'],$event['duration']);
             return EventResource::make($event);
         }else{
             return new ErrorResource(Response::HTTP_NOT_FOUND, 'Event not found', 'NOT_FOUND');
